@@ -2,7 +2,7 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
     input [31:0] WB_IR, MEM_IR, EXE_IR, DEC_IR;
     input BR_LT, BR_EQ, BR_LTU;
     output logic [3:0] ALU_FUNC;
-    output logic ALU_SRCA, REG_WR_EN, CSR_REG_EN, MEM_READ2, MEM_SIGN;
+    output logic ALU_SRCA, REG_WR_EN, CSR_WRITE, MEM_READ2, MEM_SIGN;
     output logic CLEAR;
     output logic [1:0] ALU_SRCB, RF_WR_SEL, MEM_SIZE;
     output logic [2:0] PC_SOURCE;
@@ -48,7 +48,7 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
 
       CLEAR = 0; // IR REGISTER SIGNAL
 
-      REG_WR_EN = 0; CSR_REG_EN = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
+      REG_WR_EN = 0; CSR_WRITE = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
 
       ALU_FUNC = 0; // EXECUTE STAGE SIGNAL
 
@@ -156,9 +156,12 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
       endcase
 
       PC_SOURCE = (INT_TAKEN) ? 4:PC_SOURCE; // Haven't determined how to handle intTaken
+      //int_taken will be set in execute state, and the interrupts will be triggered from then on. 
+      //Value that is stored in the decode state of the last instruction PC value will be stored back into the CSR
+      
 
 
-      case (WB_OPCODE) // HANDLES REG_WR_EN | CSR_REG_EN
+      case (WB_OPCODE) // HANDLES REG_WR_EN | CSR_WRITE
         LUI, AUIPC, JAL, JALR, OP_IMM, OP, LOAD:
           begin
               REG_WR_EN = 1;
@@ -166,10 +169,10 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
         SYSTEM:
           begin
             REG_WR_EN = (func3_wb == 1) ? 1:0;
-            CSR_REG_EN = 1;
+            CSR_WRITE = 1;
           end
         default:
-          REG_WR_EN = 0; CSR_REG_EN = 0;
+          REG_WR_EN = 0; CSR_WRITE = 0;
       endcase
 
       case (WB_OPCODE) // Handles RF_WR_SEL
