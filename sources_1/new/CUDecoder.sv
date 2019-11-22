@@ -2,8 +2,8 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
     input [31:0] WB_IR, MEM_IR, EXE_IR, DEC_IR;
     input BR_LT, BR_EQ, BR_LTU;
     output logic [3:0] ALU_FUNC;
-    output logic ALU_SRCA, REG_WR_EN, CSR_REG_EN, MEM_READ1, MEM_READ2, MEM_SIGN;
-    output logic NO_OP;
+    output logic ALU_SRCA, REG_WR_EN, CSR_REG_EN, MEM_READ2, MEM_SIGN;
+    output logic CLEAR;
     output logic [1:0] ALU_SRCB, RF_WR_SEL, MEM_SIZE;
     output logic [2:0] PC_SOURCE;
 
@@ -46,9 +46,7 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
 
       PC_SOURCE = 0; // PC SIGNAL
 
-      NO_OP = 0; // IR REGISTER SIGNAL
-      
-      MEM_READ1 = 1; // FETCH STAGE SIGNAL
+      CLEAR = 0; // IR REGISTER SIGNAL
 
       REG_WR_EN = 0; CSR_REG_EN = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
 
@@ -99,36 +97,36 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
             BEQ:
               begin
                 PC_SOURCE = (BR_EQ == 1) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             BNE:
               begin
                 PC_SOURCE = (BR_EQ == 0) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             BLT:
               begin
                 PC_SOURCE = (BR_LT == 1) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             BGE:
               begin
                 PC_SOURCE = (BR_LT == 0) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             BLTU:
               begin
                 PC_SOURCE = (BR_LTU == 1) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             BGEU:
               begin
                 PC_SOURCE = (BR_LTU == 0) ? 2 : 0;
-                NO_OP = (PC_SOURCE == 2) ? 1 : 0;
+                CLEAR = (PC_SOURCE == 2) ? 1 : 0;
               end
             default:
               begin
-                PC_SOURCE = 0; NO_OP = 0;
+                PC_SOURCE = 0; CLEAR = 0;
               end
           endcase
         OP_IMM:
