@@ -19,8 +19,46 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module OTTER_MCU(
+    CLK,RST,INT, IOBUS_IN, IOBUS_OUT, IOBUS_ADDR,IOBUS_WR,RX,TX
+);
+    input CLK,RST,INT;
+    input [31:0] IOBUS_IN;
+    input RX;
+    output TX;
+    output [31:0] IOBUS_OUT, IOBUS_ADDR;
+    output IOBUS_WR;
+
+    PC OTTER_PC(
+        .D_IN(pc_mux_out),
+        .PC_WRITE(pc_write), 
+        .RST(RST), 
+        .CLK(CLK),
+        .D_OUT(pc_out));
+
+
+    Register2 DECODE_IR(.clk(CLK),.enable(1'b1),.din(ir),.dout(DECODE_I),.rst(RST),.setnull());
+    Register PC_WAIT(.clk(CLK),.enable(),.din(PC_OUT),.dout(pc_wait_out),.rst(RST),.setnull());
+    
+    OTTER_mem_byte OTTER_MEMORY(
+        .MEM_CLK(CLK),
+        .MEM_ADDR1(pc_out),
+        .MEM_READ1(1'b1),
+        .MEM_DOUT1(ir),
+        .MEM_DOUT2(dout2),
+        .MEM_DIN2(mem_data_after),
+        .MEM_ADDR2(mem_addr_after),
+        .MEM_SIZE(mem_size),
+        .MEM_READ2(memRead2),
+        .MEM_WRITE2(mem_we_after),
+        .IO_IN(IOBUS_IN),
+        .IO_WR(IOBUS_WR),
+        .MEM_SIGN()
+    );
+
+endmodule
+
+module OTTER_MCU_old(
 CLK,RST,INT, IOBUS_IN, IOBUS_OUT, IOBUS_ADDR,IOBUS_WR,RX,TX
     ); 
     input CLK,RST,INT;

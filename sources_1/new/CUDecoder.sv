@@ -18,7 +18,8 @@ module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
     } opcode_t;
 
     assign DEC_OPCODE = opcode_t'(DEC_IR[6:0]);
-    
+    always_comb
+    begin
     case (DEC_OPCODE) // Handles ALU_SRCA | ALU_SRCB
         LUI:
           begin
@@ -42,12 +43,15 @@ module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
             ALU_SRCA = 0; ALU_SRCB = 0;
           end
     endcase
+    end
 endmodule
 
 module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR);
     input [31:0] EXE_IR;
     logic [7:0] EXEC_OPCODE;
-
+    output logic clear;
+    output logic [3:0] ALU_FUNC;
+    
     typedef enum logic [6:0] {
     LUI = 7'b0110111,
     AUIPC = 7'b0010111,
@@ -62,7 +66,8 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR);
     } opcode_t;
 
     assign EXEC_OPCODE = opcode_t'(EXE_IR[6:0]);
-
+    always_comb
+    begin
     case (EXEC_OPCODE) // HANDLES PC_SOURCE | ALU_FUNC
         LUI:
           begin
@@ -139,7 +144,7 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR);
             PC_SOURCE = 0; ALU_FUNC = 0;
           end
       endcase
-
+    end
 endmodule
 
 
