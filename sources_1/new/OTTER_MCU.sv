@@ -37,8 +37,25 @@ module OTTER_MCU(
         .D_OUT(pc_out));
 
 
-    Register2 DECODE_IR(.clk(CLK),.enable(1'b1),.din(ir),.dout(DECODE_I),.rst(RST),.setnull());
+    Register DECODE_IR(.clk(CLK),.enable(1'b1),.din(ir),.dout(DECODE_I),.rst(RST),.setnull());
+    Register DECODE_PC(.clk(CLK),.enable(1'b1),.din(pc_wait_out),.dout(DECODE_PC),.rst(RST),.setnull());
+
+    Register EXECUTE_IR(.clk(CLK),.enable(),.din(DECODE_I),.dout(EXECUTE_I),.rst(RST),.setnull());
+    Register EXECUTE_PC(.clk(CLK),.enable(),.din(DECODE_PC),.dout(EXECUTE_PC),.rst(RST),.setnull());
+
+    Register MEMORY_IR(.clk(CLK),.enable(),.din(EXECUTE_I),.dout(MEMORY_I),.rst(RST),.setnull());
+    Register MEMORY_PC(.clk(CLK),.enable(),.din(EXECUTE_PC),.dout(MEMORY_PC),.rst(RST),.setnull());
+    
+    Register WB_IR(.clk(CLK),.enable(),.din(MEMORY_I),.dout(WB_I),.rst(RST),.setnull());
+    Register WB_PC(.clk(CLK),.enable(),.din(MEMORY_PC),.dout(WB_PC),.rst(RST),.setnull());
+
+    
+
+
+
     Register PC_WAIT(.clk(CLK),.enable(),.din(PC_OUT),.dout(pc_wait_out),.rst(RST),.setnull());
+    
+
     
     OTTER_mem_byte OTTER_MEMORY(
         .MEM_CLK(CLK),
