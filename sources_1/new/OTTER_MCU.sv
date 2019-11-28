@@ -72,7 +72,7 @@ module OTTER_MCU(
     Register WB_PC(.clk(CLK),.enable(),.din(memory_pc),.dout(wb_pc),.rst(RST),.setnull());
     assign wb_pc_4 = wb_pc + 4;
 
-    Register PC_WAIT(.clk(CLK),.enable(),.din(PC_OUT),.dout(pc_wait_out),.rst(RST),.setnull());
+    Register PC_WAIT(.clk(CLK),.enable(),.din(pc_out),.dout(pc_wait_out),.rst(RST),.setnull());
 
     or or1(rst_new, RST, prog_rst);
 
@@ -159,7 +159,7 @@ module OTTER_MCU(
     Register registerA(
         .din(rs1_mux_out),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(reg_A_out)
     );
@@ -167,7 +167,7 @@ module OTTER_MCU(
     Register registerB(
         .din(rs2_mux_out),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(reg_B_out)
     );
@@ -175,7 +175,7 @@ module OTTER_MCU(
     Register MD1(
         .din(rs2),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(md1_out)
     );
@@ -183,7 +183,7 @@ module OTTER_MCU(
     Register MD2(
         .din(md1_out),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(md2_out)
     );
@@ -197,7 +197,7 @@ module OTTER_MCU(
     Register alu_reg(
         .din(alu_out),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(alu_reg_out)
     );
@@ -205,7 +205,7 @@ module OTTER_MCU(
     Register wb_reg(
         .din(alu_reg_out),
         .en(1),
-        .clk(CLK)
+        .clk(CLK),
         .rst(0),
         .dout(wb_reg_out)
     );
