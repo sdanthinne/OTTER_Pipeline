@@ -16,7 +16,7 @@ module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
-
+    opcode_t DEC_OPCODE;
     assign DEC_OPCODE = opcode_t'(DEC_IR[6:0]);
 
     always_comb
@@ -77,6 +77,9 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
+    opcode_t EXEC_OPCODE;
+    func3_t func3_exe;
+
     assign func3_exe = func3_t'(EXE_IR[14:12]);
     assign func7 = EXE_IR[31:25];
 
@@ -179,6 +182,7 @@ module Memory_Decoder(MEM_IR,MEM_READ2, MEM_WRITE2, MEM_SIGN, MEM_SIZE);
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
+    opcode_t MEM_OPCODE;
 
     assign MEM_OPCODE = opcode_t'(MEM_IR[6:0]);
 
@@ -197,7 +201,7 @@ module Writeback_Decoder(WB_IR);
     BLTU = 3'b110,
     BGEU = 3'b111
     } func3_t;
-    func3_t func3_exe;
+    func3_t func3_wb;
 
     assign func3_wb = func3_t'(WB_IR[14:12]);
     typedef enum logic [6:0] {
@@ -212,8 +216,9 @@ module Writeback_Decoder(WB_IR);
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
+    opcode_t WB_OPCODE;
 
-    logic WB_OPCODE = opcode_t'(WB_IR[6:0]);
+    assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
 
     case (WB_OPCODE) // HANDLES REG_WR_EN | CSR_WRITE
         LUI, AUIPC, JAL, JALR, OP_IMM, OP, LOAD:
