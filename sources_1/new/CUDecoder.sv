@@ -14,7 +14,7 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
     BLTU = 3'b110,
     BGEU = 3'b111
     } func3_t;
-    
+
     typedef enum logic [6:0] {
     LUI = 7'b0110111,
     AUIPC = 7'b0010111,
@@ -55,7 +55,8 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
           end
         BRANCH:
         begin
-          BRANCH:
+          //evaluates beanch statements in decode to save clock cycles that we need to clear. 
+          //Should have split up clear to clear the pc/fetch state and the decode state of the next instruction(s)
           case(func3_exe)
             BEQ:
               begin
