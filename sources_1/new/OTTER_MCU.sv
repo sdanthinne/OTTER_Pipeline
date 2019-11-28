@@ -40,6 +40,8 @@ module OTTER_MCU(
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
     logic [2:0] pc_src;
     logic [3:0] alu_func;
+    
+    logic clear_decode, clear_execute, clear_memory,clear_wb,refetch_pc;
 
     mux8_3 pc_mux(
         .ZERO(pc_4),

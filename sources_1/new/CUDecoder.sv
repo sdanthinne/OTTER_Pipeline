@@ -1,9 +1,20 @@
-module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
+module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
     input [31:0] DEC_IR;
+    input BR_EQ, BR_LTU,BR_LT;
     output logic [1:0] ALU_SRCB;
     output logic ALU_SRCA;
     logic [6:0] DEC_OPCODE;
 
+
+    typedef enum logic [2:0] {
+    BEQ = 3'b000,
+    BNE = 3'b001,
+    BLT = 3'b100,
+    BGE = 3'b101,
+    BLTU = 3'b110,
+    BGEU = 3'b111
+    } func3_t;
+    
     typedef enum logic [6:0] {
     LUI = 7'b0110111,
     AUIPC = 7'b0010111,
@@ -18,6 +29,9 @@ module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
     } opcode_t;
     opcode_t DEC_OPCODE;
     assign DEC_OPCODE = opcode_t'(DEC_IR[6:0]);
+    func3_t func3_exe;
+
+    assign func3_exe = func3_t'(EXE_IR[14:12]);
 
     always_comb
     begin
@@ -39,68 +53,9 @@ module Decode_Decoder(DEC_IR,ALU_SRCA,ALU_SRCB);
           begin
               ALU_SRCB = 2;
           end
-        default:
-          begin
-            ALU_SRCA = 0; ALU_SRCB = 0;
-          end
-    endcase
-    end
-endmodule
-
-module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
-    //I need to draw out some diagrams 
-    input [31:0] EXE_IR;
-    logic [7:0] EXEC_OPCODE;
-    output logic CLEAR;
-    output logic [3:0] ALU_FUNC, PC_SOURCE;
-
-    
-    //not sure if PC_source should be set here or not. 
-    typedef enum logic [2:0] {
-    BEQ = 3'b000,
-    BNE = 3'b001,
-    BLT = 3'b100,
-    BGE = 3'b101,
-    BLTU = 3'b110,
-    BGEU = 3'b111
-    } func3_t;
-
-    typedef enum logic [6:0] {
-    LUI = 7'b0110111,
-    AUIPC = 7'b0010111,
-    JAL = 7'b1101111,
-    JALR = 7'b1100111,
-    BRANCH = 7'b1100011,
-    LOAD = 7'b0000011,
-    STORE = 7'b0100011,
-    OP_IMM = 7'b0010011,
-    OP = 7'b0110011,
-    SYSTEM = 7'b1110011
-    } opcode_t;
-    opcode_t EXEC_OPCODE;
-    func3_t func3_exe;
-
-    assign func3_exe = func3_t'(EXE_IR[14:12]);
-    assign func7 = EXE_IR[31:25];
-
-    assign EXEC_OPCODE = opcode_t'(EXE_IR[6:0]);
-    always_comb
-    begin
-    case (EXEC_OPCODE) // HANDLES PC_SOURCE | ALU_FUNC
-        LUI:
-          begin
-            ALU_FUNC = 9;
-          end
-
-        JAL:
-          begin
-            PC_SOURCE = 3;
-          end
-        JALR:
-          begin
-            PC_SOURCE = 1;
-          end
         BRANCH:
+        begin
+          BRANCH:
           case(func3_exe)
             BEQ:
               begin
@@ -137,6 +92,64 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
                 PC_SOURCE = 0; CLEAR = 0;
               end
           endcase
+        end
+        JALR,JAL:
+        begin
+          
+        end
+        default:
+          begin
+            ALU_SRCA = 0; ALU_SRCB = 0;
+          end
+    endcase
+    end
+endmodule
+
+module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
+    //I need to draw out some diagrams 
+    input [31:0] EXE_IR;
+    logic [7:0] EXEC_OPCODE;
+    output logic CLEAR;
+    output logic [3:0] ALU_FUNC, PC_SOURCE;
+
+    
+    //not sure if PC_source should be set here or not. 
+    
+
+    typedef enum logic [6:0] {
+    LUI = 7'b0110111,
+    AUIPC = 7'b0010111,
+    JAL = 7'b1101111,
+    JALR = 7'b1100111,
+    BRANCH = 7'b1100011,
+    LOAD = 7'b0000011,
+    STORE = 7'b0100011,
+    OP_IMM = 7'b0010011,
+    OP = 7'b0110011,
+    SYSTEM = 7'b1110011
+    } opcode_t;
+    opcode_t EXEC_OPCODE;
+    
+    assign func7 = EXE_IR[31:25];
+
+    assign EXEC_OPCODE = opcode_t'(EXE_IR[6:0]);
+    always_comb
+    begin
+    case (EXEC_OPCODE) // HANDLES PC_SOURCE | ALU_FUNC
+        LUI:
+          begin
+            ALU_FUNC = 9;
+          end
+
+        JAL:
+          begin
+            PC_SOURCE = 3;
+          end
+        JALR:
+          begin
+            PC_SOURCE = 1;
+          end
+        
         OP_IMM:
           begin
             if(func7 == 32 && func3_exe == 5)
