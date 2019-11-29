@@ -40,8 +40,8 @@ module OTTER_MCU(
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
     logic [2:0] pc_src;
     logic [3:0] alu_func;
-    
-    logic clear_decode, clear_execute, clear_memory,clear_wb,refetch_pc;
+
+    logic clear_decode, clear_execute, clear_memory, clear_wb, refetch_pc;
 
     mux8_3 pc_mux(
         .ZERO(pc_4),
@@ -64,9 +64,24 @@ module OTTER_MCU(
     Register DECODE_IR(.clk(CLK),.enable(1'b1),.din(ir),.dout(decode_i),.rst(RST),.setnull());
     Register DECODE_PC(.clk(CLK),.enable(1'b1),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull());
 
+    Decode_Decoder DEC_DECODER(
+        .DEC_IR(decode_i),
+        .BR_EQ(br_eq),
+        .BR_LTU(br_ltu),
+        .BR_LT(br_lt),
+        .ALU_SRCB(alu_srcB),
+        .ALU_SRCA(alu_srcA),
+        .PC_SOURCE(pc_src)
+    );
+
     Register EXECUTE_IR(.clk(CLK),.enable(),.din(decode_i),.dout(execute_i),.rst(RST),.setnull());
     Register EXECUTE_PC(.clk(CLK),.enable(),.din(decode_pc),.dout(execute_pc),.rst(RST),.setnull());
 
+    Execute_Decoder EXE_DECODER(
+        .EXE_IR(execute_i),
+        .CLEAR(),
+        .ALU_FUNC(),
+    );
     Register MEMORY_IR(.clk(CLK),.enable(),.din(execute_i),.dout(memory_i),.rst(RST),.setnull());
     Register MEMORY_PC(.clk(CLK),.enable(),.din(execute_pc),.dout(memory_pc),.rst(RST),.setnull());
 
@@ -75,8 +90,6 @@ module OTTER_MCU(
     assign wb_pc_4 = wb_pc + 4;
 
     Register PC_WAIT(.clk(CLK),.enable(),.din(pc_out),.dout(pc_wait_out),.rst(RST),.setnull());
-
-    or or1(rst_new, RST, prog_rst);
 
     CSR csr_intr(
         .CLK(CLK),
