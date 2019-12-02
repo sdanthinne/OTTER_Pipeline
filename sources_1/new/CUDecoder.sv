@@ -293,46 +293,46 @@ begin
     
 endmodule
 
-module CUDecoder_old(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, DEC_IR_EN, BR_LT, BR_EQ, BR_LTU, ALU_FUNC, ALU_SRCA, ALU_SRCB, PCSOURCE, RF_WR_SEL);
-    input [31:0] WB_IR, MEM_IR, EXE_IR, DEC_IR;
-    input BR_LT, BR_EQ, BR_LTU;
-    output logic [3:0] ALU_FUNC;
-    output logic ALU_SRCA, REG_WR_EN, CSR_WRITE, MEM_READ2, MEM_SIGN;
-    output logic CLEAR;
-    output logic [1:0] ALU_SRCB, RF_WR_SEL, MEM_SIZE;
-    output logic [2:0] PC_SOURCE;
+//module CUDecoder_old(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, DEC_IR_EN, BR_LT, BR_EQ, BR_LTU, ALU_FUNC, ALU_SRCA, ALU_SRCB, PCSOURCE, RF_WR_SEL);
+//    input [31:0] WB_IR, MEM_IR, EXE_IR, DEC_IR;
+//    input BR_LT, BR_EQ, BR_LTU;
+//    output logic [3:0] ALU_FUNC;
+//    output logic ALU_SRCA, REG_WR_EN, CSR_WRITE, MEM_READ2, MEM_SIGN;
+//    output logic CLEAR;
+//    output logic [1:0] ALU_SRCB, RF_WR_SEL, MEM_SIZE;
+//    output logic [2:0] PC_SOURCE;
 
-    typedef enum logic [6:0] {
-    LUI = 7'b0110111,
-    AUIPC = 7'b0010111,
-    JAL = 7'b1101111,
-    JALR = 7'b1100111,
-    BRANCH = 7'b1100011,
-    LOAD = 7'b0000011,
-    STORE = 7'b0100011,
-    OP_IMM = 7'b0010011,
-    OP = 7'b0110011,
-    SYSTEM = 7'b1110011
-    } opcode_t;
-    opcode_t EXEC_OPCODE;
+//    typedef enum logic [6:0] {
+//    LUI = 7'b0110111,
+//    AUIPC = 7'b0010111,
+//    JAL = 7'b1101111,
+//    JALR = 7'b1100111,
+//    BRANCH = 7'b1100011,
+//    LOAD = 7'b0000011,
+//    STORE = 7'b0100011,
+//    OP_IMM = 7'b0010011,
+//    OP = 7'b0110011,
+//    SYSTEM = 7'b1110011
+//    } opcode_t;
+//    opcode_t EXEC_OPCODE;
 
    
     
-    //assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
+//    //assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
 
     
 
 
-    always_comb
-    begin
+//    always_comb
+//    begin
 
-      PC_SOURCE = 0; // PC SIGNAL
+//      PC_SOURCE = 0; // PC SIGNAL
 
-      CLEAR = 0; // IR REGISTER SIGNAL
+//      CLEAR = 0; // IR REGISTER SIGNAL
 
-      //REG_WR_EN = 0; CSR_WRITE = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
+//      //REG_WR_EN = 0; CSR_WRITE = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
 
-      ALU_FUNC = 0; // EXECUTE STAGE SIGNAL
+//      ALU_FUNC = 0; // EXECUTE STAGE SIGNAL
 
       
 
@@ -340,11 +340,11 @@ module CUDecoder_old(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_
 
       
 
-      //PC_SOURCE = (INT_TAKEN) ? 4:PC_SOURCE; // Haven't determined how to handle intTaken
-      //int_taken will be set in execute state, and the interrupts will be triggered from then on. 
-      //Value that is stored in the decode state of the last instruction PC value will be stored back into the CSR
+//      //PC_SOURCE = (INT_TAKEN) ? 4:PC_SOURCE; // Haven't determined how to handle intTaken
+//      //int_taken will be set in execute state, and the interrupts will be triggered from then on. 
+//      //Value that is stored in the decode state of the last instruction PC value will be stored back into the CSR
       
-    end
+//    end
 
       
-endmodule
+//endmodule

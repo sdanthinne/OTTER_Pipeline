@@ -79,7 +79,7 @@ module OTTER_MCU(
         .executeIR_out(execute_i),
         .reg_en(reg_en),
         .pc_write(pc_write),
-        .hzd_out(hzdOut),
+        .hzd_out(hzdOut)
     );
 
     Register HZD1(
@@ -411,4 +411,17 @@ output logic [31:0] JALR, BRANCH, JUMP;
 assign BRANCH = PC_OUT + B_TYPE;
 assign JALR = RS1 + I_TYPE;
 assign JUMP = PC_OUT + J_TYPE;
+endmodule
+
+module CondGen(RS1,RS2,BR_LT,BR_LTU, BR_EQ);
+    input [31:0] RS1,RS2;
+    output logic BR_LT,BR_LTU,BR_EQ;
+    always_comb
+    begin
+    BR_EQ = (RS1 == RS2) ? 1:0;
+    BR_LT = ($signed(RS1) < $signed(RS2)) ? 1:0;
+    BR_LTU = (RS1 < RS2) ? 1 : 0;
+    end
+
+
 endmodule

@@ -33,3 +33,12 @@ module DataResolution(
       end
   end
 endmodule
+
+module DataResolution_mod(decodeIR_out,executeIR_out,clk,decodeIR_en,executeIR_en,pc_write);
+input [31:0] decodeIR_out;
+input [31:0] executeIR_out;
+input clk;
+output logic decodeIR_en, executeIR_en,pc_write;
+
+
+endmodule
