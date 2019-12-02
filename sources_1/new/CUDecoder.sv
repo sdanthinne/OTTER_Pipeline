@@ -1,9 +1,9 @@
-module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE);
+module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEAR);
     input [31:0] DEC_IR;
     input BR_EQ, BR_LTU,BR_LT;
     output logic [1:0] ALU_SRCB;
     output logic [3:0] PC_SOURCE;
-    output logic ALU_SRCA;
+    output logic ALU_SRCA,CLEAR;
     logic [6:0] DEC_OPCODE;
 
 
