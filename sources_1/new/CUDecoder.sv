@@ -1,7 +1,8 @@
-module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
+module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE);
     input [31:0] DEC_IR;
     input BR_EQ, BR_LTU,BR_LT;
     output logic [1:0] ALU_SRCB;
+    output logic [3:0] PC_SOURCE;
     output logic ALU_SRCA;
     logic [6:0] DEC_OPCODE;
 
@@ -35,7 +36,7 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
 
     always_comb
     begin
-    case (DEC_OPCODE) // Handles ALU_SRCA | ALU_SRCB
+    case (DEC_OPCODE) // Handles ALU_SRCA | ALU_SRCB | PC_SOURCE | CLEAR
         LUI:
           begin
               ALU_SRCA = 1;
@@ -94,9 +95,17 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB);
               end
           endcase
         end
-        JALR,JAL:
+        JALR:
         begin
-          
+          PC_SOURCE = 3;
+        end
+        JAL:
+        begin
+          PC_SOURCE = 1;
+        end
+        SYSTEM:
+        begin
+          PC_SOURCE = (func3_exe == 0) ? 5 : 0;
         end
         default:
           begin
@@ -111,7 +120,7 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
     input [31:0] EXE_IR;
     logic [7:0] EXEC_OPCODE;
     output logic CLEAR;
-    output logic [3:0] ALU_FUNC, PC_SOURCE;
+    output logic [3:0] ALU_FUNC;
 
     
     //not sure if PC_source should be set here or not. 
@@ -137,20 +146,10 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
     always_comb
     begin
     case (EXEC_OPCODE) // HANDLES PC_SOURCE | ALU_FUNC
-        LUI:
+        LUI,JAL,JALR:
           begin
             ALU_FUNC = 9;
           end
-
-        JAL:
-          begin
-            PC_SOURCE = 3;
-          end
-        JALR:
-          begin
-            PC_SOURCE = 1;
-          end
-        
         OP_IMM:
           begin
             if(func7 == 32 && func3_exe == 5)
@@ -169,11 +168,10 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
         SYSTEM:
           begin
               ALU_FUNC = 9;
-              PC_SOURCE = (func3_exe == 0) ? 5 : 0;
           end
         default:
           begin
-            PC_SOURCE = 0; ALU_FUNC = 0;
+            ALU_FUNC = 0;
           end
       endcase
     end
