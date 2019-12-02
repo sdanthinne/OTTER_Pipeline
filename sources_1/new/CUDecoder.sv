@@ -4,7 +4,7 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
     output logic [1:0] ALU_SRCB;
     output logic [3:0] PC_SOURCE;
     output logic ALU_SRCA,CLEAR;
-    logic [6:0] DEC_OPCODE;
+   
 
 
     typedef enum logic [2:0] {
@@ -28,15 +28,17 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
-    opcode_t DEC_OPCODE;
-    assign DEC_OPCODE = opcode_t'(DEC_IR[6:0]);
+    
+    opcode_t DEC_OPCODE_T;
+    assign DEC_OPCODE_T = opcode_t'(DEC_IR[6:0]);
+    
     func3_t func3_exe;
 
-    assign func3_exe = func3_t'(EXE_IR[14:12]);
+    assign func3_exe = func3_t'(DEC_IR[14:12]);
 
     always_comb
     begin
-    case (DEC_OPCODE) // Handles ALU_SRCA | ALU_SRCB | PC_SOURCE | CLEAR
+    case (DEC_OPCODE_T) // Handles ALU_SRCA | ALU_SRCB | PC_SOURCE | CLEAR
         LUI:
           begin
               ALU_SRCA = 1;
@@ -115,17 +117,25 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
     end
 endmodule
 
-module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
+module Execute_Decoder(EXE_IR,ALU_FUNC);
     //I need to draw out some diagrams 
     input [31:0] EXE_IR;
     logic [7:0] EXEC_OPCODE;
-    output logic CLEAR;
     output logic [3:0] ALU_FUNC;
 
     
     //not sure if PC_source should be set here or not. 
     
 
+typedef enum logic [2:0] {
+    BEQ = 3'b000,
+    BNE = 3'b001,
+    BLT = 3'b100,
+    BGE = 3'b101,
+    BLTU = 3'b110,
+    BGEU = 3'b111
+    } func3_t;
+    
     typedef enum logic [6:0] {
     LUI = 7'b0110111,
     AUIPC = 7'b0010111,
@@ -138,14 +148,21 @@ module Execute_Decoder(EXE_IR,ALU_FUNC,CLEAR,PC_SOURCE);
     OP = 7'b0110011,
     SYSTEM = 7'b1110011
     } opcode_t;
-    opcode_t EXEC_OPCODE;
+    opcode_t EXEC_OPCODE_T;
+    
+    
+    func3_t func3_exe;
+
+    assign func3_exe = func3_t'(EXE_IR[14:12]);
+    
+    logic [6:0] func7;
     
     assign func7 = EXE_IR[31:25];
 
-    assign EXEC_OPCODE = opcode_t'(EXE_IR[6:0]);
+    assign EXEC_OPCODE_T = opcode_t'(EXE_IR[6:0]);
     always_comb
     begin
-    case (EXEC_OPCODE) // HANDLES PC_SOURCE | ALU_FUNC
+    case (EXEC_OPCODE_T) // HANDLES PC_SOURCE | ALU_FUNC
         LUI,JAL,JALR:
           begin
             ALU_FUNC = 9;
@@ -198,12 +215,16 @@ module Memory_Decoder(MEM_IR,MEM_READ2, MEM_WRITE2, MEM_SIGN, MEM_SIZE);
 
     assign MEM_OPCODE = opcode_t'(MEM_IR[6:0]);
 
-    MEM_READ2 = (MEM_OPCODE == LOAD) ? 1:0; MEM_WRITE2 = (MEM_OPCODE == STORE) ? 1:0; MEM_SIGN = MEM_IR[14]; MEM_SIZE = MEM_IR[13:12]; // MEMORY STAGE SIGNALS
+    assign MEM_READ2 = (MEM_OPCODE == LOAD) ? 1:0; 
+    assign MEM_WRITE2 = (MEM_OPCODE == STORE) ? 1:0; 
+    assign MEM_SIGN = MEM_IR[14]; 
+    assign MEM_SIZE = MEM_IR[13:12]; // MEMORY STAGE SIGNALS
 endmodule
 
-module Writeback_Decoder(WB_IR);
+module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL);
     input [31:0] WB_IR;
-
+    output logic CSR_WRITE, REG_WR_EN;
+    output logic [2:0] RF_WR_SEL; 
 
     typedef enum logic [2:0] {
     BEQ = 3'b000,
@@ -231,7 +252,8 @@ module Writeback_Decoder(WB_IR);
     opcode_t WB_OPCODE;
 
     assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
-
+always_comb
+begin
     case (WB_OPCODE) // HANDLES REG_WR_EN | CSR_WRITE
         LUI, AUIPC, JAL, JALR, OP_IMM, OP, LOAD:
           begin
@@ -243,7 +265,10 @@ module Writeback_Decoder(WB_IR);
             CSR_WRITE = 1;
           end
         default:
-          REG_WR_EN = 0; CSR_WRITE = 0;
+        begin
+          REG_WR_EN = 0; 
+          CSR_WRITE = 0;
+        end
       endcase
 
       case (WB_OPCODE) // Handles RF_WR_SEL
@@ -264,10 +289,11 @@ module Writeback_Decoder(WB_IR);
             RF_WR_SEL = 0;
           end
       endcase
-    end
+  end
+    
 endmodule
 
-module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, DEC_IR_EN, BR_LT, BR_EQ, BR_LTU, ALU_FUNC, ALU_SRCA, ALU_SRCB, PCSOURCE, RF_WR_SEL);
+module CUDecoder_old(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, DEC_IR_EN, BR_LT, BR_EQ, BR_LTU, ALU_FUNC, ALU_SRCA, ALU_SRCB, PCSOURCE, RF_WR_SEL);
     input [31:0] WB_IR, MEM_IR, EXE_IR, DEC_IR;
     input BR_LT, BR_EQ, BR_LTU;
     output logic [3:0] ALU_FUNC;
@@ -292,7 +318,7 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
 
    
     
-    assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
+    //assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
 
     
 
@@ -304,7 +330,7 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
 
       CLEAR = 0; // IR REGISTER SIGNAL
 
-      REG_WR_EN = 0; CSR_WRITE = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
+      //REG_WR_EN = 0; CSR_WRITE = 0; RF_WR_EN = 0; ALU_SRCA = 0; ALU_SRCB = 0; // DECODE STAGE SIGNALS
 
       ALU_FUNC = 0; // EXECUTE STAGE SIGNAL
 
@@ -314,11 +340,11 @@ module CUDecoder(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, 
 
       
 
-      PC_SOURCE = (INT_TAKEN) ? 4:PC_SOURCE; // Haven't determined how to handle intTaken
+      //PC_SOURCE = (INT_TAKEN) ? 4:PC_SOURCE; // Haven't determined how to handle intTaken
       //int_taken will be set in execute state, and the interrupts will be triggered from then on. 
       //Value that is stored in the decode state of the last instruction PC value will be stored back into the CSR
       
-
+    end
 
       
 endmodule
