@@ -2,7 +2,7 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
     input [31:0] DEC_IR;
     input BR_EQ, BR_LTU,BR_LT;
     output logic [1:0] ALU_SRCB;
-    output logic [3:0] PC_SOURCE;
+    output logic [2:0] PC_SOURCE;
     output logic ALU_SRCA,CLEAR;
    
 
@@ -37,7 +37,12 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
     assign func3_exe = func3_t'(DEC_IR[14:12]);
 
     always_comb
+    
     begin
+    ALU_SRCA = 0;
+    ALU_SRCB = 0;
+    PC_SOURCE = 0;
+    CLEAR = 0;
     case (DEC_OPCODE_T) // Handles ALU_SRCA | ALU_SRCB | PC_SOURCE | CLEAR
         LUI:
           begin
@@ -60,6 +65,7 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
         begin
           //evaluates beanch statements in decode to save clock cycles that we need to clear. 
           //Should have split up clear to clear the pc/fetch state and the decode state of the next instruction(s)
+          
           case(func3_exe)
             BEQ:
               begin
@@ -224,7 +230,7 @@ endmodule
 module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL);
     input [31:0] WB_IR;
     output logic CSR_WRITE, REG_WR_EN;
-    output logic [2:0] RF_WR_SEL; 
+    output logic [1:0] RF_WR_SEL; 
 
     typedef enum logic [2:0] {
     BEQ = 3'b000,
@@ -254,6 +260,7 @@ module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL);
     assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
 always_comb
 begin
+CSR_WRITE = 0;
     case (WB_OPCODE) // HANDLES REG_WR_EN | CSR_WRITE
         LUI, AUIPC, JAL, JALR, OP_IMM, OP, LOAD:
           begin

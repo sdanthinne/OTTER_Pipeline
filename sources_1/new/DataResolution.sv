@@ -2,10 +2,11 @@
 // need to be updated in a previous instruction
 
 module DataResolution(
-  input hzd_in,
+  input [31:0] hzd_in,
   input [31:0] decodeIR_out,
   input [31:0] executeIR_out,
-  output logic reg_en, pc_write, hzd_out
+  output logic reg_en, pc_write,
+  output logic [31:0] hzd_out
 );
 
 // decodeIR_out is the output of the decode register
@@ -15,6 +16,9 @@ module DataResolution(
 
   always_comb
   begin
+  reg_en = 1;
+  pc_write = 1;
+  hzd_out = 0;
     if (executeIR_out[6:0] != 7'b1100011 && executeIR_out[6:0] != 7'b0100011) // opcodes with rd
       begin
         if ((decodeIR_out[6:0] == 7'b1100011 || decodeIR_out[6:0] == 7'b0100011

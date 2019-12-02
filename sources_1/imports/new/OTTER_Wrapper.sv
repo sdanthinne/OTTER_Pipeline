@@ -27,14 +27,14 @@ module OTTER_Wrapper(
    input [15:0] SWITCHES,
    input PS2Clk,
    input PS2Data,
-   input RX, 
+   
    output logic [15:0] LEDS,
    output [7:0] CATHODES,
    output [3:0] ANODES,
    output [7:0] VGA_RGB,
    output VGA_HS,
-   output VGA_VS,
-   output TX
+   output VGA_VS
+   
    );
         
     logic sclk2 =0;
@@ -60,7 +60,7 @@ module OTTER_Wrapper(
    
    // Signals for connecting VGA Framebuffer Driver
    logic r_vga_we;             // write enable
-   logic [16:0] r_vga_wa;      // address of framebuffer to read and write
+   logic [12:0] r_vga_wa;      // address of framebuffer to read and write
    logic [7:0] r_vga_wd;       // pixel color data to write to framebuffer
    logic [7:0] r_vga_rd;       // pixel color data read from framebuffer
  
@@ -74,7 +74,7 @@ module OTTER_Wrapper(
    assign s_interrupt = keyboard_int | btn_int;
    
     // Declare OTTER_CPU ///////////////////////////////////////////////////////
-   OTTER_MCU MCU (.RST(s_reset),.INT(s_interrupt), .CLK(sclk), .TX(TX), .RX(RX), 
+   OTTER_MCU MCU (.RST(s_reset),.INT(s_interrupt), .CLK(sclk),  
                    .IOBUS_OUT(IOBUS_out),.IOBUS_IN(IOBUS_in),.IOBUS_ADDR(IOBUS_addr),.IOBUS_WR(IOBUS_wr));
 
    // Declare Seven Segment Display /////////////////////////////////////////

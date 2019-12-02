@@ -49,9 +49,9 @@ module RegisterFile32x32(
     assign RS2 = mem[ADR2];
 endmodule
 
-module Register(clk, enable, din, dout,rst,setnull);
+module Register(clk, en, din, dout,rst,setnull);
     input [31:0] din;
-    input enable, clk,rst,setnull;
+    input en, clk,rst,setnull;
     //enable is equivalent to writeEnable
     output logic [31:0] dout=0;
     //basic instruction register
@@ -59,17 +59,17 @@ module Register(clk, enable, din, dout,rst,setnull);
     
     always_ff @ (posedge clk)
     begin
-        if(enable) dout <= din;
+        if(en) dout <= din;
         if (rst) dout <= 0;
         if (setnull) dout <= 32'h00000013;
-        dout<=dout;
+        
     end
 endmodule
 
-module Register2(clk, enable, din1, dout1,pcin,pcout,rst,setnull);
+module Register2(clk, en, din1, dout1,pcin,pcout,rst,setnull);
     input [31:0] din1;
     input [31:0] pcin;
-    input enable, clk,rst,setnull;
+    input en, clk,rst,setnull;
     output logic [31:0] dout1=0;
     output logic [31:0] pcout=0;
 
@@ -78,7 +78,7 @@ module Register2(clk, enable, din1, dout1,pcin,pcout,rst,setnull);
     
     always_ff @ (posedge clk)
     begin
-        if(enable)begin
+        if(en)begin
             pcout <= pcin;
             dout1 <= din1;
         end 

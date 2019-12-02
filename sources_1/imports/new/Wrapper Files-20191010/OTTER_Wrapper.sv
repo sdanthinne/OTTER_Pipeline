@@ -45,7 +45,7 @@ module OTTER_Wrapper_old(
    
    
     // Declare OTTER_CPU ///////////////////////////////////////////////////////
-   OTTER_MCU MCU (.RST(s_reset),.INT(s_interrupt), .CLK(sclk), 
+   OTTER_MCU MCU (.RST(s_reset),.INT(s_interrupt), .CLK(CLK), 
                    .IOBUS_OUT(IOBUS_out),.IOBUS_IN(IOBUS_in),.IOBUS_ADDR(IOBUS_addr),.IOBUS_WR(IOBUS_wr));
 //OTTER_MCU MCU (.RST(s_reset),.INT(BTNL), .CLK(sclk), 
 //                   .IOBUS_OUT(IOBUS_out),.IOBUS_IN(IOBUS_in),.IOBUS_ADDR(IOBUS_addr),.IOBUS_WR(IOBUS_wr));
