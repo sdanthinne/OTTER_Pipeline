@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="149000001fs"></ZoomEndTime>
-      <Cursor1Time time="40600000fs"></Cursor1Time>
+      <ZoomStartTime time="780833333fs"></ZoomStartTime>
+      <ZoomEndTime time="1043833334fs"></ZoomEndTime>
+      <Cursor1Time time="1000000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="162"></NameColumnWidth>
       <ValueColumnWidth column_width="92"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="13" />
+   <WVObjectSize size="16" />
    <wvobject type="logic" fp_name="/sad_sim/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -45,6 +45,46 @@
       <obj_property name="ElementShortName">SEL[2:0]</obj_property>
       <obj_property name="ObjectShortName">SEL[2:0]</obj_property>
       <obj_property name="label">PC_SOURCE[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group56">
+      <obj_property name="label">PC_MUX</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/ZERO">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">ZERO[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ZERO[31:0]</obj_property>
+         <obj_property name="label">PC+4[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/ONE">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">ONE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ONE[31:0]</obj_property>
+         <obj_property name="label">jump[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/TWO">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">TWO[31:0]</obj_property>
+         <obj_property name="ObjectShortName">TWO[31:0]</obj_property>
+         <obj_property name="label">branch[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/THREE">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">THREE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">THREE[31:0]</obj_property>
+         <obj_property name="label">jalr[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/FOUR">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">FOUR[31:0]</obj_property>
+         <obj_property name="ObjectShortName">FOUR[31:0]</obj_property>
+         <obj_property name="label">mtvec[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/FIVE">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">FIVE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">FIVE[31:0]</obj_property>
+         <obj_property name="label">mepc[31:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_PC/D_OUT">
       <obj_property name="DisplayName">label</obj_property>
@@ -79,5 +119,70 @@
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_IR">
       <obj_property name="ElementShortName">WB_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">WB_IR[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group48">
+      <obj_property name="label">TAR_GEN</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/RS1">
+         <obj_property name="ElementShortName">RS1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">RS1[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/I_TYPE">
+         <obj_property name="ElementShortName">I_TYPE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">I_TYPE[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/B_TYPE">
+         <obj_property name="ElementShortName">B_TYPE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">B_TYPE[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/J_TYPE">
+         <obj_property name="ElementShortName">J_TYPE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">J_TYPE[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/PC_OUT">
+         <obj_property name="ElementShortName">PC_OUT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PC_OUT[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/JALR">
+         <obj_property name="ElementShortName">JALR[31:0]</obj_property>
+         <obj_property name="ObjectShortName">JALR[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/BRANCH">
+         <obj_property name="ElementShortName">BRANCH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">BRANCH[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/tar_gen_main/JUMP">
+         <obj_property name="ElementShortName">JUMP[31:0]</obj_property>
+         <obj_property name="ObjectShortName">JUMP[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group55">
+      <obj_property name="label">IMM_GEN</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/IR">
+         <obj_property name="ElementShortName">IR[31:0]</obj_property>
+         <obj_property name="ObjectShortName">IR[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/I">
+         <obj_property name="ElementShortName">I[31:0]</obj_property>
+         <obj_property name="ObjectShortName">I[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/S">
+         <obj_property name="ElementShortName">S[31:0]</obj_property>
+         <obj_property name="ObjectShortName">S[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/B">
+         <obj_property name="ElementShortName">B[31:0]</obj_property>
+         <obj_property name="ObjectShortName">B[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/U">
+         <obj_property name="ElementShortName">U[31:0]</obj_property>
+         <obj_property name="ObjectShortName">U[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/J">
+         <obj_property name="ElementShortName">J[31:0]</obj_property>
+         <obj_property name="ObjectShortName">J[31:0]</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>

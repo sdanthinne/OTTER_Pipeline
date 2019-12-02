@@ -29,7 +29,7 @@ module OTTER_MCU(
 
     // Temporary variables
     logic [31:0] decode_i, decode_pc, execute_i, execute_pc, memory_i, memory_pc,
-    wb_i, wb_pc, pc_wait_out, rf_wr_out, jalr, branch, jal, mtvec, mepc, pc_mux_out, pc_out,
+    wb_i, wb_pc, pc_wait_out, rf_wr_out, jalr, branch, jump, mtvec, mepc, pc_mux_out, pc_out,
     pc_4, ir, dout2, mem_data_after, mem_addr_after, rf_mux_out, rs1, rs2, i_type,
     s_type, b_type, u_type, j_type, rs1_mux_out, rs2_mux_out, md1_out, reg_A_out,
     md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,jalr_wait;
@@ -40,12 +40,12 @@ module OTTER_MCU(
     logic [3:0] alu_func;
 
 
-    Register jalrReg(.clk(CLK),.en(1),.din(jalr),.dout(jalr_wait),.rst(RST),.setnull(0));
+    //Register jalrReg(.clk(CLK),.en(1),.din(jalr),.dout(jalr_wait),.rst(RST),.setnull(0));
     mux8_3 pc_mux(
         .ZERO(pc_4),
-        .ONE(jalr),
+        .ONE(jump),
         .TWO(branch),
-        .THREE(jalr_wait),
+        .THREE(jalr),
         .FOUR(mtvec),
         .FIVE(mepc),
         .SEL(pc_src),
@@ -192,7 +192,7 @@ module OTTER_MCU(
     );
 
     ImmGen immediate_generator(
-        .IR(ir),
+        .IR(decode_i),
         .I(i_type),
         .S(s_type),
         .B(b_type),
@@ -269,7 +269,7 @@ module OTTER_MCU(
     );
     assign IOBUS_OUT = rs2;
     assign IOBUS_ADDR = alu_out;
-    TarGen tar_gen_main (.RS1(rs1),.I_TYPE(itype),.B_TYPE(btype),.J_TYPE(jtype),.PC_OUT(pc_out),.JALR(jalr),.BRANCH(branch),.JUMP(jump));
+    TarGen tar_gen_main (.RS1(rs1),.I_TYPE(i_type),.B_TYPE(b_type),.J_TYPE(j_type),.PC_OUT(decode_pc),.JALR(jalr),.BRANCH(branch),.JUMP(jump));
     
 endmodule
 
