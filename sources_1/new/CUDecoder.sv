@@ -126,7 +126,7 @@ endmodule
 module Execute_Decoder(EXE_IR,ALU_FUNC);
     //I need to draw out some diagrams 
     input [31:0] EXE_IR;
-    logic [7:0] EXEC_OPCODE;
+    
     output logic [3:0] ALU_FUNC;
 
     

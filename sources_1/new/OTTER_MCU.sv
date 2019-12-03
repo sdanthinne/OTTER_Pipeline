@@ -58,11 +58,11 @@ module OTTER_MCU(
         .RST(RST),
         .CLK(CLK),
         .D_OUT(pc_out));
+
     assign pc_4 = pc_out + 4;
-
-    Register DECODE_IR(.clk(CLK),.en(1'b1),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
-    Register DECODE_PC(.clk(CLK),.en(1'b1),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull(clear));
-
+    Register DECODE_IR(.clk(CLK),.en(reg_en),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
+    Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull(clear));
+    
     Decode_Decoder DEC_DECODER(
         .DEC_IR(decode_i),
         .BR_EQ(br_eq),
@@ -133,7 +133,7 @@ module OTTER_MCU(
     );
     assign wb_pc_4 = wb_pc + 4;
 
-    Register PC_WAIT(.clk(CLK),.en(1),.din(pc_out),.dout(pc_wait_out),.rst(RST),.setnull(0));
+    Register PC_WAIT(.clk(CLK),.en(reg_en),.din(pc_out),.dout(pc_wait_out),.rst(RST),.setnull(0));
 
     CSR csr_intr(
         .CLK(CLK),
@@ -178,8 +178,8 @@ module OTTER_MCU(
         .CLK(CLK),
         .EN(regWrite),
         .WD(rf_wr_out),
-        .ADR1(ir[19:15]),
-        .ADR2(ir[24:20]),
+        .ADR1(decode_i[19:15]),
+        .ADR2(decode_i[24:20]),
         .WA(wa),
         .RS1(rs1),
         .RS2(rs2)

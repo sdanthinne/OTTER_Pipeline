@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="166616545fs"></ZoomEndTime>
-      <Cursor1Time time="232334000fs"></Cursor1Time>
+      <ZoomEndTime time="352704877fs"></ZoomEndTime>
+      <Cursor1Time time="71028000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="162"></NameColumnWidth>
+      <NameColumnWidth column_width="198"></NameColumnWidth>
       <ValueColumnWidth column_width="84"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="30" />
+   <WVObjectSize size="38" />
    <wvobject type="logic" fp_name="/sad_sim/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -102,6 +102,10 @@
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">DEC_PC[31:0]</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/DEC_DECODER/DEC_OPCODE_T">
+      <obj_property name="ElementShortName">DEC_OPCODE_T[6:0]</obj_property>
+      <obj_property name="ObjectShortName">DEC_OPCODE_T[6:0]</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXE_DECODER/EXE_IR">
       <obj_property name="ElementShortName">EXE_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">EXE_IR[31:0]</obj_property>
@@ -111,6 +115,10 @@
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">EXE_PC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXE_DECODER/EXEC_OPCODE_T">
+      <obj_property name="ElementShortName">EXEC_OPCODE_T[6:0]</obj_property>
+      <obj_property name="ObjectShortName">EXEC_OPCODE_T[6:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEM_DECODER/MEM_IR">
       <obj_property name="ElementShortName">MEM_IR[31:0]</obj_property>
@@ -122,6 +130,10 @@
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">MEM_PC[31:0]</obj_property>
    </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEM_DECODER/MEM_OPCODE">
+      <obj_property name="ElementShortName">MEM_OPCODE[6:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_OPCODE[6:0]</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_IR">
       <obj_property name="ElementShortName">WB_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">WB_IR[31:0]</obj_property>
@@ -131,6 +143,28 @@
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">WB_PC[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerA/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">REGISTER_A_OUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerB/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">REGISTER_B_OUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/MD1/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">MD1_OUT[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_OPCODE">
+      <obj_property name="ElementShortName">WB_OPCODE[6:0]</obj_property>
+      <obj_property name="ObjectShortName">WB_OPCODE[6:0]</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group134">
       <obj_property name="label">RF_WRITE</obj_property>
@@ -169,6 +203,12 @@
       <obj_property name="ElementShortName">EN</obj_property>
       <obj_property name="ObjectShortName">EN</obj_property>
       <obj_property name="label">write_EN</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/alu_reg/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">ALU_REG_dout[31:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/GPRs/mem">
       <obj_property name="ElementShortName">mem[0:31][31:0]</obj_property>
