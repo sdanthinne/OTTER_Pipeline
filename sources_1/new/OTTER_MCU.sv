@@ -215,7 +215,7 @@ module OTTER_MCU(
 
     Register registerA(
         .din(rs1_mux_out),
-        .en(1),
+        .en(reg_en),
         .clk(CLK),
         .rst(0),
         .dout(reg_A_out)
@@ -223,7 +223,7 @@ module OTTER_MCU(
 
     Register registerB(
         .din(rs2_mux_out),
-        .en(1),
+        .en(reg_en),
         .clk(CLK),
         .rst(0),
         .dout(reg_B_out)
@@ -231,7 +231,7 @@ module OTTER_MCU(
 
     Register MD1(
         .din(rs2),
-        .en(1),
+        .en(reg_en),
         .clk(CLK),
         .rst(0),
         .dout(md1_out)

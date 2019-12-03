@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="780833333fs"></ZoomStartTime>
-      <ZoomEndTime time="1043833334fs"></ZoomEndTime>
-      <Cursor1Time time="1000000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="149000001fs"></ZoomEndTime>
+      <Cursor1Time time="500000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="162"></NameColumnWidth>
       <ValueColumnWidth column_width="92"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="16" />
+   <WVObjectSize size="26" />
    <wvobject type="logic" fp_name="/sad_sim/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -159,7 +159,6 @@
    <wvobject type="group" fp_name="group55">
       <obj_property name="label">IMM_GEN</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/IR">
          <obj_property name="ElementShortName">IR[31:0]</obj_property>
          <obj_property name="ObjectShortName">IR[31:0]</obj_property>
@@ -184,5 +183,53 @@
          <obj_property name="ElementShortName">J[31:0]</obj_property>
          <obj_property name="ObjectShortName">J[31:0]</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/hzd_out">
+      <obj_property name="ElementShortName">hzd_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">hzd_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/hzd_in">
+      <obj_property name="ElementShortName">hzd_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">hzd_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/decodeIR_out">
+      <obj_property name="ElementShortName">decodeIR_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">decodeIR_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/executeIR_out">
+      <obj_property name="ElementShortName">executeIR_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">executeIR_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/reg_en">
+      <obj_property name="ElementShortName">reg_en</obj_property>
+      <obj_property name="ObjectShortName">reg_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/pc_write">
+      <obj_property name="ElementShortName">pc_write</obj_property>
+      <obj_property name="ObjectShortName">pc_write</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/HZD1/din">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">din[31:0]</obj_property>
+      <obj_property name="ObjectShortName">din[31:0]</obj_property>
+      <obj_property name="label">HZD1_din[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/HZD1/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">HZD1_dout[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/HZD2/din">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">din[31:0]</obj_property>
+      <obj_property name="ObjectShortName">din[31:0]</obj_property>
+      <obj_property name="label">HZD2_din[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/HZD2/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">HZD2dout[31:0]</obj_property>
    </wvobject>
 </wave_config>
