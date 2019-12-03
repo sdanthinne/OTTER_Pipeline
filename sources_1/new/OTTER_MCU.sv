@@ -34,7 +34,7 @@ module OTTER_MCU(
     s_type, b_type, u_type, j_type, rs1_mux_out, rs2_mux_out, md1_out, reg_A_out,
     md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,jalr_wait,wb_pc_4;
     logic pc_write, csrWrite, mie, memRead2, mem_we_after, mem_sign, regWrite, br_eq,
-    br_lt, br_ltu, alu_srcA, clear,  reg_en;
+    br_lt, br_ltu, alu_srcA, clear,  reg_en, clear_data,clear_decode;
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
     logic [2:0] pc_src;
     logic [3:0] alu_func;
@@ -60,6 +60,8 @@ module OTTER_MCU(
         .D_OUT(pc_out));
 
     assign pc_4 = pc_out + 4;
+    assign clear = clear_data || clear_decode;
+    
     Register DECODE_IR(.clk(CLK),.en(reg_en),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
     Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull(clear));
     
@@ -71,7 +73,7 @@ module OTTER_MCU(
         .ALU_SRCB(alu_srcB),
         .ALU_SRCA(alu_srcA),
         .PC_SOURCE(pc_src),
-        .CLEAR(clear)
+        .CLEAR(clear_decode)
     );
 
     DataResolution data_resolution(
@@ -80,7 +82,8 @@ module OTTER_MCU(
         .executeIR_out(execute_i),
         .reg_en(reg_en),
         .pc_write(pc_write),
-        .hzd_out(hzdOut)
+        .hzd_out(hzdOut),
+        .clear(clear_data)
     );
     
 

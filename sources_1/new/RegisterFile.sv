@@ -54,15 +54,28 @@ module Register(clk, en, din, dout,rst,setnull);
     input en, clk,rst,setnull;
     //enable is equivalent to writeEnable
     output logic [31:0] dout=0;
+    logic [31:0] data_store;
     //basic instruction register
     
     
     always_ff @ (posedge clk)
     begin
-        if(en) dout <= din;
-        if (rst) dout <= 0;
-        if (setnull) dout <= 32'h00000013;
-        
+        if(en) data_store <= din;
+        if (rst) data_store <= 0;
+    end
+
+    always_comb
+    begin
+        if(setnull)
+        begin
+            dout = 32'h00000013;
+        end
+        else
+        begin
+            dout = data_store;
+        end
+         
+
     end
 endmodule
 
