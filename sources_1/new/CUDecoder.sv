@@ -227,10 +227,11 @@ module Memory_Decoder(MEM_IR,MEM_READ2, MEM_WRITE2, MEM_SIGN, MEM_SIZE);
     assign MEM_SIZE = MEM_IR[13:12]; // MEMORY STAGE SIGNALS
 endmodule
 
-module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL);
+module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL,WB_WA);
     input [31:0] WB_IR;
     output logic CSR_WRITE, REG_WR_EN;
     output logic [1:0] RF_WR_SEL; 
+    output logic [4:0] WB_WA;
 
     typedef enum logic [2:0] {
     BEQ = 3'b000,
@@ -256,7 +257,7 @@ module Writeback_Decoder(WB_IR,CSR_WRITE,REG_WR_EN,RF_WR_SEL);
     SYSTEM = 7'b1110011
     } opcode_t;
     opcode_t WB_OPCODE;
-
+    assign WB_WA = WB_IR[11:7];
     assign WB_OPCODE = opcode_t'(WB_IR[6:0]);
 always_comb
 begin

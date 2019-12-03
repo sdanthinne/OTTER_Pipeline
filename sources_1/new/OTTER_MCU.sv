@@ -32,12 +32,13 @@ module OTTER_MCU(
     wb_i, wb_pc, pc_wait_out, rf_wr_out, jalr, branch, jump, mtvec, mepc, pc_mux_out, pc_out,
     pc_4, ir, dout2, mem_data_after, mem_addr_after, rf_mux_out, rs1, rs2, i_type,
     s_type, b_type, u_type, j_type, rs1_mux_out, rs2_mux_out, md1_out, reg_A_out,
-    md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,jalr_wait;
+    md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,jalr_wait,wb_pc_4;
     logic pc_write, csrWrite, mie, memRead2, mem_we_after, mem_sign, regWrite, br_eq,
     br_lt, br_ltu, alu_srcA, clear,  reg_en;
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
     logic [2:0] pc_src;
     logic [3:0] alu_func;
+    logic [4:0] wa;
 
 
     //Register jalrReg(.clk(CLK),.en(1),.din(jalr),.dout(jalr_wait),.rst(RST),.setnull(0));
@@ -127,7 +128,8 @@ module OTTER_MCU(
         .WB_IR(wb_i),
         .CSR_WRITE(csrWrite),
         .REG_WR_EN(regWrite),
-        .RF_WR_SEL(rf_wr_sel)
+        .RF_WR_SEL(rf_wr_sel),
+        .WB_WA(wa)
     );
     assign wb_pc_4 = wb_pc + 4;
 
@@ -175,10 +177,10 @@ module OTTER_MCU(
     RegisterFile32x32 GPRs(
         .CLK(CLK),
         .EN(regWrite),
-        .WD(rf_mux_out),
+        .WD(rf_wr_out),
         .ADR1(ir[19:15]),
         .ADR2(ir[24:20]),
-        .WA(ir[11:7]),
+        .WA(wa),
         .RS1(rs1),
         .RS2(rs2)
     );
