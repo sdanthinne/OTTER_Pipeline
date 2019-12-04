@@ -91,7 +91,8 @@ input clk,
 output logic reg_en=1,pc_write=1,clear=0);
 
 
-logic [1:0] counter = 0;
+logic [1:0] counter = 0, p_counter = 0;
+
 logic hzd = 0;
 logic [4:0] rd_exec,rs1_dec,rs2_dec;
 assign rd_exec  =  executeIR_out[11:7];
@@ -122,11 +123,14 @@ begin
   if (hzd)
     begin
       counter <= counter + 1;
+      
+      if(counter == 2)
+      begin
+        counter <= 0;
+      end
     end
-  // else if(counter == 2)
-  // begin
-  //   counter <= 0;
-  // end
+  p_counter <= counter;
+  
 end
 always_comb
 begin
@@ -147,10 +151,10 @@ begin
     end
 
 
-    if (counter == 3)
+    if (p_counter == 2)
     begin
       reg_en = 1; pc_write = 1;
-      clear = 0; hzd = 0; counter = 0;
+      clear = 0; hzd = 0; //counter = 0;
     end
     else if(hzd == 1)
     begin
