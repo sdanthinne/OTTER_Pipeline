@@ -34,7 +34,7 @@ module OTTER_MCU(
     s_type, b_type, u_type, j_type, rs1_mux_out, rs2_mux_out, md1_out, reg_A_out,
     md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,hzd3_out,jalr_wait,wb_pc_4;
     logic pc_write, csrWrite, mie, memRead2, mem_we_after, mem_sign, regWrite, br_eq,
-    br_lt, br_ltu, alu_srcA, clear,  reg_en, clear_data,clear_decode;
+    br_lt, br_ltu, alu_srcA, clear,  reg_en, clear_data,clear_decode, hzd_delay_rst;
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
     logic [2:0] pc_src;
     logic [3:0] alu_func;
@@ -61,10 +61,10 @@ module OTTER_MCU(
 
     assign pc_4 = pc_out + 4;
     assign clear = clear_data || clear_decode;
-    
+
     Register DECODE_IR(.clk(CLK),.en(reg_en),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
     Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull());
-    
+
     Decode_Decoder DEC_DECODER(
         .DEC_IR(decode_i),
         .BR_EQ(br_eq),
@@ -77,41 +77,12 @@ module OTTER_MCU(
     );
 
     DataResolution data_resolution(
-        .hzd_in(hzd3_out),
+        .clk(CLK),
         .decodeIR_out(decode_i),
         .executeIR_out(execute_i),
         .reg_en(reg_en),
         .pc_write(pc_write),
-        .hzd_out(hzdOut),
         .clear(clear_data)
-    );
-    
-
-    Register HZD1(
-        .clk(CLK),
-        .en(1),
-        .din(hzdOut),
-        .dout(hzd1_out),
-        .rst(0),
-        .setnull(0)
-    );
-
-    Register HZD2(
-        .clk(CLK),
-        .en(1),
-        .din(hzd1_out),
-        .dout(hzd2_out),
-        .rst(0),
-        .setnull(0)
-    );
-
-    Register HZD3(
-        .clk(CLK),
-        .en(1),
-        .din(hzd2_out),
-        .dout(hzd3_out),
-        .rst(0),
-        .setnull(0)
     );
 
     Register EXECUTE_IR(.clk(CLK),.en(1),.din(decode_i),.dout(execute_i),.rst(RST),.setnull());
@@ -163,7 +134,7 @@ module OTTER_MCU(
 
     OTTER_mem_byte OTTER_MEMORY(
         .MEM_CLK(CLK),
-        .MEM_ADDR1(pc_out), 
+        .MEM_ADDR1(pc_out),
         .MEM_READ1(reg_en),
         .MEM_DOUT1(ir),
         .MEM_DOUT2(dout2),
@@ -278,13 +249,13 @@ module OTTER_MCU(
         .en(1),
         .clk(CLK),
         .rst(0),
-        .dout(wb_reg_out) 
-        
+        .dout(wb_reg_out)
+
     );
     assign IOBUS_OUT = rs2;
     assign IOBUS_ADDR = alu_out;
     TarGen tar_gen_main (.RS1(rs1),.I_TYPE(i_type),.B_TYPE(b_type),.J_TYPE(j_type),.PC_OUT(decode_pc),.JALR(jalr),.BRANCH(branch),.JUMP(jump));
-    
+
 endmodule
 
 
@@ -444,4 +415,3 @@ module CondGen(RS1,RS2,BR_LT,BR_LTU, BR_EQ);
 
 
 endmodule
-
