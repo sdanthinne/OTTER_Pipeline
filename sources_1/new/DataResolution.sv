@@ -83,11 +83,11 @@ assign execute_opcode = opcode_t'(executeIR_out[6:0]);
 
 endmodule
 
-module DataResolution_mod(decodeIR_out,executeIR_out,clk,decodeIR_en,executeIR_en,pc_write);
+module DataResolution_mod(decodeIR_out,executeIR_out,clk,reg_en,clear,pc_write);
 input [31:0] decodeIR_out;
 input [31:0] executeIR_out;
 input clk;
-output logic reg_en,pc_write,clear;
+output logic reg_en=1,pc_write=1,clear=0;
 
 logic [1:0] counter = 0;
 logic hzd = 0;
@@ -138,12 +138,12 @@ begin
     end
 
 
-    if (counter == 2)
+    if (counter == 3)
     begin
       reg_en = 1; pc_write = 1;
       clear = 0; hzd = 0; counter = 0;
     end
-    else if(hzd_taken == 1)
+    else if(hzd == 1)
     begin
       reg_en = 0;
       pc_write = 0;

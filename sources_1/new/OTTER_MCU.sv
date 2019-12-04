@@ -76,7 +76,7 @@ module OTTER_MCU(
         .CLEAR(clear_decode)
     );
 
-    DataResolution data_resolution(
+    DataResolution_mod data_resolution(
         .clk(CLK),
         .decodeIR_out(decode_i),
         .executeIR_out(execute_i),
