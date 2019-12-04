@@ -63,7 +63,7 @@ module OTTER_MCU(
     assign clear = clear_data || clear_decode;
     
     Register DECODE_IR(.clk(CLK),.en(reg_en),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
-    Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull(clear));
+    Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull());
     
     Decode_Decoder DEC_DECODER(
         .DEC_IR(decode_i),
@@ -106,7 +106,7 @@ module OTTER_MCU(
     );
 
     Register EXECUTE_IR(.clk(CLK),.en(reg_en),.din(decode_i),.dout(execute_i),.rst(RST),.setnull(clear));
-    Register EXECUTE_PC(.clk(CLK),.en(reg_en),.din(decode_pc),.dout(execute_pc),.rst(RST),.setnull(clear));
+    Register EXECUTE_PC(.clk(CLK),.en(reg_en),.din(decode_pc),.dout(execute_pc),.rst(RST),.setnull());
 
     Execute_Decoder EXE_DECODER(
         .EXE_IR(execute_i),
