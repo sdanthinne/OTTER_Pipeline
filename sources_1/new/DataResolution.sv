@@ -113,13 +113,20 @@ typedef enum logic [6:0] {
 opcode_t decode_opcode,execute_opcode;
 assign decode_opcode = opcode_t'(decodeIR_out[6:0]);
 assign execute_opcode = opcode_t'(executeIR_out[6:0]);
+//problem: there are multiple drivers for the counter logic, and there can only be one. So, to fix this we need to change when our signals are set.
+//currently, the counter goes 0,1,2,0 and on the second zero, all of the hazard signals are set to their correct values. This is the "three" state of the counter.
+//what is currently commented out is what the counter set should be, but if it is like that it isn't possible yet.
 
 always_ff @(posedge clk)
 begin
   if (hzd)
     begin
-      counter = counter + 1;
+      counter <= counter + 1;
     end
+  // else if(counter == 2)
+  // begin
+  //   counter <= 0;
+  // end
 end
 always_comb
 begin

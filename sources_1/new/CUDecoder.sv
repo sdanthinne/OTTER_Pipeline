@@ -313,25 +313,22 @@ module persist_one_two_clk #(parameter wait_time = 0) (input clk, in_signal, out
     begin
       counter <= counter + 1;
     end
-  end
-  
-  always_comb
-  begin
     if(counter == wait_time)
     begin
-      out_signal = 0;
-      count_enable = 0;
-      counter = 0;
+      out_signal <= 0;
+      count_enable <= 0;
+      counter <= 0;
       
     end
     else if(in_signal)
     begin
-      count_enable = 1;
-      out_signal = 1;
-      counter = 0;
+      count_enable <= 1;
+      out_signal <= 1;
+      counter <= 0;
     end
-    
   end
+  
+  
 
 endmodule
 //module CUDecoder_old(WB_IR, WB_IR_EN, MEM_IR, MEM_IR_EN, EXE_IR, EXE_IR_EN, DEC_IR, DEC_IR_EN, BR_LT, BR_EQ, BR_LTU, ALU_FUNC, ALU_SRCA, ALU_SRCB, PCSOURCE, RF_WR_SEL);

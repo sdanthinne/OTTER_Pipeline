@@ -58,6 +58,7 @@ module OTTER_MCU(
         .RST(RST),
         .CLK(CLK),
         .D_OUT(pc_out));
+    assign pc_write = pc_write_data || clear_decode_delayed;
 
     assign pc_4 = pc_out + 4;
     assign clear = clear_data || clear_decode_delayed;
@@ -75,14 +76,14 @@ module OTTER_MCU(
         .PC_SOURCE(pc_src),
         .CLEAR(clear_decode)
     );
-    persist_one_two_clk  #(.wait_time(3)) persist_branch_clear (.clk(CLK),.in_signal(clear_decode),.out_signal(clear_decode_delayed));
+    persist_one_two_clk  #(.wait_time(1)) persist_branch_clear (.clk(CLK),.in_signal(clear_decode),.out_signal(clear_decode_delayed));
 
     DataResolution_mod data_resolution(
         .clk(CLK),
         .decodeIR_out(decode_i),
         .executeIR_out(execute_i),
         .reg_en(reg_en),
-        .pc_write(pc_write),
+        .pc_write(pc_write_data),
         .clear(clear_data)
     );
 
