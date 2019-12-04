@@ -106,10 +106,12 @@ module Decode_Decoder(DEC_IR,BR_EQ,BR_LT,BR_LTU,ALU_SRCA,ALU_SRCB,PC_SOURCE,CLEA
         JALR:
         begin
           PC_SOURCE = 3;
+          CLEAR = 1;
         end
         JAL:
         begin
           PC_SOURCE = 1;
+          CLEAR = 1;
         end
         SYSTEM:
         begin

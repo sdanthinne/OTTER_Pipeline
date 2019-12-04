@@ -82,12 +82,14 @@ assign execute_opcode = opcode_t'(executeIR_out[6:0]);
     end
 
 endmodule
+//decodeIR_out,executeIR_out,clk,reg_en,clear,pc_write
 
-module DataResolution_mod(decodeIR_out,executeIR_out,clk,reg_en,clear,pc_write);
-input [31:0] decodeIR_out;
-input [31:0] executeIR_out;
-input clk;
-output logic reg_en=1,pc_write=1,clear=0;
+module DataResolution_mod(
+input [31:0] decodeIR_out,
+input [31:0] executeIR_out,
+input clk,
+output logic reg_en=1,pc_write=1,clear=0);
+
 
 logic [1:0] counter = 0;
 logic hzd = 0;
@@ -121,7 +123,7 @@ begin
 end
 always_comb
 begin
-  if (execute_opcode != BRANCH && execute_opcode != STORE) // opcodes with rd
+  if (execute_opcode != BRANCH && execute_opcode != STORE && decode_opcode != 0) // opcodes with rd
     begin
 
       if ((decode_opcode == BRANCH || decode_opcode == STORE || decode_opcode == OP)

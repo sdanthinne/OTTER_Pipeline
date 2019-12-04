@@ -60,7 +60,7 @@ module OTTER_MCU(
         .D_OUT(pc_out));
 
     assign pc_4 = pc_out + 4;
-    assign clear = clear_data || clear_decode;
+    assign clear = clear_data;
 
     Register DECODE_IR(.clk(CLK),.en(reg_en),.din(ir),.dout(decode_i),.rst(RST),.setnull(clear));
     Register DECODE_PC(.clk(CLK),.en(reg_en),.din(pc_wait_out),.dout(decode_pc),.rst(RST),.setnull());
