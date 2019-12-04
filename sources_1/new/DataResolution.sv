@@ -123,7 +123,7 @@ begin
 end
 always_comb
 begin
-  if (execute_opcode != BRANCH && execute_opcode != STORE && decode_opcode != 0) // opcodes with rd
+  if (execute_opcode != BRANCH && execute_opcode != STORE && decode_opcode != 0 && executeIR_out != 32'h13 && decodeIR_out != 32'h13) // opcodes with rd
     begin
 
       if ((decode_opcode == BRANCH || decode_opcode == STORE || decode_opcode == OP)

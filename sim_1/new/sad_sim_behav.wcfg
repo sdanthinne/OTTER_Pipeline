@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0fs"></ZoomStartTime>
-      <ZoomEndTime time="147118077fs"></ZoomEndTime>
-      <Cursor1Time time="500000000fs"></Cursor1Time>
+      <ZoomEndTime time="316200001fs"></ZoomEndTime>
+      <Cursor1Time time="153200000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="198"></NameColumnWidth>
-      <ValueColumnWidth column_width="101"></ValueColumnWidth>
+      <ValueColumnWidth column_width="97"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="39" />
+   <WVObjectSize size="44" />
    <wvobject type="logic" fp_name="/sad_sim/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -74,17 +74,60 @@
       <obj_property name="ElementShortName">PC_WRITE</obj_property>
       <obj_property name="ObjectShortName">PC_WRITE</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_PC/D_OUT">
+   <wvobject type="group" fp_name="group285">
+      <obj_property name="label">PC</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">D_OUT[31:0]</obj_property>
-      <obj_property name="ObjectShortName">D_OUT[31:0]</obj_property>
-      <obj_property name="label">PC_out[31:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_PC/D_OUT">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">D_OUT[31:0]</obj_property>
+         <obj_property name="ObjectShortName">D_OUT[31:0]</obj_property>
+         <obj_property name="label">PC_out[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/PC_WAIT/dout">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">dout[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+         <obj_property name="label">PC_WAIT_out[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/DECODE_PC/dout">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">dout[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+         <obj_property name="label">DEC_PC[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXECUTE_PC/dout">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">dout[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+         <obj_property name="label">EXE_PC[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEMORY_PC/dout">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">dout[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+         <obj_property name="label">MEM_PC[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_PC/dout">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">dout[31:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+         <obj_property name="label">WB_PC[31:0]</obj_property>
+      </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/sad_sim/wr/MCU/PC_WAIT/dout">
-      <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="ElementShortName">dout[31:0]</obj_property>
-      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
-      <obj_property name="label">PC_WAIT_out[31:0]</obj_property>
+   <wvobject fp_name="divider219" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear">
+      <obj_property name="ElementShortName">clear</obj_property>
+      <obj_property name="ObjectShortName">clear</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear_data">
+      <obj_property name="ElementShortName">clear_data</obj_property>
+      <obj_property name="ObjectShortName">clear_data</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear_decode">
+      <obj_property name="ElementShortName">clear_decode</obj_property>
+      <obj_property name="ObjectShortName">clear_decode</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_MEMORY/MEM_DOUT1">
       <obj_property name="ElementShortName">MEM_DOUT1[31:0]</obj_property>
@@ -125,34 +168,6 @@
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/rs2_dec">
       <obj_property name="ElementShortName">rs2_dec[4:0]</obj_property>
       <obj_property name="ObjectShortName">rs2_dec[4:0]</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group285">
-      <obj_property name="label">PC</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-      <wvobject type="array" fp_name="/sad_sim/wr/MCU/DECODE_PC/dout">
-         <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">dout[31:0]</obj_property>
-         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
-         <obj_property name="label">DEC_PC[31:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXECUTE_PC/dout">
-         <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">dout[31:0]</obj_property>
-         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
-         <obj_property name="label">EXE_PC[31:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEMORY_PC/dout">
-         <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">dout[31:0]</obj_property>
-         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
-         <obj_property name="label">MEM_PC[31:0]</obj_property>
-      </wvobject>
-      <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_PC/dout">
-         <obj_property name="DisplayName">label</obj_property>
-         <obj_property name="ElementShortName">dout[31:0]</obj_property>
-         <obj_property name="ObjectShortName">dout[31:0]</obj_property>
-         <obj_property name="label">WB_PC[31:0]</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/DECODE_IR/data_store">
       <obj_property name="DisplayName">label</obj_property>
@@ -299,6 +314,7 @@
    <wvobject type="group" fp_name="group55">
       <obj_property name="label">IMM_GEN</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/IR">
          <obj_property name="ElementShortName">IR[31:0]</obj_property>
          <obj_property name="ObjectShortName">IR[31:0]</obj_property>
@@ -343,5 +359,46 @@
    <wvobject type="group" fp_name="group106">
       <obj_property name="label">HZD_REG</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerA/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">REG_A_dout[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerB/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">REG_B_dout[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group227">
+      <obj_property name="label">wait_clock_cycles_module</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/persist_branch_clear/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/persist_branch_clear/in_signal">
+         <obj_property name="ElementShortName">in_signal</obj_property>
+         <obj_property name="ObjectShortName">in_signal</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/persist_branch_clear/out_signal">
+         <obj_property name="ElementShortName">out_signal</obj_property>
+         <obj_property name="ObjectShortName">out_signal</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/persist_branch_clear/counter">
+         <obj_property name="ElementShortName">counter[31:0]</obj_property>
+         <obj_property name="ObjectShortName">counter[31:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/persist_branch_clear/count_enable">
+         <obj_property name="ElementShortName">count_enable</obj_property>
+         <obj_property name="ObjectShortName">count_enable</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/persist_branch_clear/wait_time">
+         <obj_property name="ElementShortName">wait_time[31:0]</obj_property>
+         <obj_property name="ObjectShortName">wait_time[31:0]</obj_property>
+      </wvobject>
    </wvobject>
 </wave_config>
