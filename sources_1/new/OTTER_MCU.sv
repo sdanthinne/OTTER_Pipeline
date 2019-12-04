@@ -32,7 +32,7 @@ module OTTER_MCU(
     wb_i, wb_pc, pc_wait_out, rf_wr_out, jalr, branch, jump, mtvec, mepc, pc_mux_out, pc_out,
     pc_4, ir, dout2, mem_data_after, mem_addr_after, rf_mux_out, rs1, rs2, i_type,
     s_type, b_type, u_type, j_type, rs1_mux_out, rs2_mux_out, md1_out, reg_A_out,
-    md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,jalr_wait,wb_pc_4;
+    md2_out, reg_B_out, alu_out, alu_reg_out, wb_reg_out,csr_reg,hzdOut, hzd1_out, hzd2_out,hzd3_out,jalr_wait,wb_pc_4;
     logic pc_write, csrWrite, mie, memRead2, mem_we_after, mem_sign, regWrite, br_eq,
     br_lt, br_ltu, alu_srcA, clear,  reg_en, clear_data,clear_decode;
     logic [1:0] mem_size, rf_wr_sel, alu_srcB;
@@ -77,7 +77,7 @@ module OTTER_MCU(
     );
 
     DataResolution data_resolution(
-        .hzd_in(hzd2_out),
+        .hzd_in(hzd3_out),
         .decodeIR_out(decode_i),
         .executeIR_out(execute_i),
         .reg_en(reg_en),
@@ -105,8 +105,17 @@ module OTTER_MCU(
         .setnull(0)
     );
 
-    Register EXECUTE_IR(.clk(CLK),.en(reg_en),.din(decode_i),.dout(execute_i),.rst(RST),.setnull(clear));
-    Register EXECUTE_PC(.clk(CLK),.en(reg_en),.din(decode_pc),.dout(execute_pc),.rst(RST),.setnull());
+    Register HZD3(
+        .clk(CLK),
+        .en(1),
+        .din(hzd2_out),
+        .dout(hzd3_out),
+        .rst(0),
+        .setnull(0)
+    );
+
+    Register EXECUTE_IR(.clk(CLK),.en(1),.din(decode_i),.dout(execute_i),.rst(RST),.setnull());
+    Register EXECUTE_PC(.clk(CLK),.en(1),.din(decode_pc),.dout(execute_pc),.rst(RST),.setnull());
 
     Execute_Decoder EXE_DECODER(
         .EXE_IR(execute_i),
@@ -154,8 +163,8 @@ module OTTER_MCU(
 
     OTTER_mem_byte OTTER_MEMORY(
         .MEM_CLK(CLK),
-        .MEM_ADDR1(pc_out),
-        .MEM_READ1(1'b1),
+        .MEM_ADDR1(pc_out), 
+        .MEM_READ1(reg_en),
         .MEM_DOUT1(ir),
         .MEM_DOUT2(dout2),
         .MEM_DIN2(md2_out),

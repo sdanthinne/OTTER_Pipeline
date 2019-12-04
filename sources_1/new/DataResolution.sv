@@ -15,21 +15,54 @@ module DataResolution(
 // decodeIR_en is the enable bit for the decode register
 // executeIR_en is the enable bit for the execute register
 logic hzd_taken = 0;
+logic [4:0] rd_exec,rs1_dec,rs2_dec;
+assign rd_exec  =  executeIR_out[11:7];
+assign rs1_dec = decodeIR_out[19:15];
+assign rs2_dec = decodeIR_out[24:20];
+
+
+
+typedef enum logic [6:0] {
+    LUI = 7'b0110111,
+    AUIPC = 7'b0010111,
+    JAL = 7'b1101111,
+    JALR = 7'b1100111,
+    BRANCH = 7'b1100011,
+    LOAD = 7'b0000011,
+    STORE = 7'b0100011,
+    OP_IMM = 7'b0010011,
+    OP = 7'b0110011,
+    SYSTEM = 7'b1110011
+    } opcode_t;
+logic hit_if = 0;
+opcode_t decode_opcode,execute_opcode;
+assign decode_opcode = opcode_t'(decodeIR_out[6:0]);
+assign execute_opcode = opcode_t'(executeIR_out[6:0]);
+
+//decodeIR_out[2:0] != 3'b111  || (decodeIR_out[6:0] == 6'b1100111) 
   always_comb
   begin
-  
-    if (executeIR_out[6:0] != 7'b1100011 && executeIR_out[6:0] != 7'b0100011) // opcodes with rd
+    if (execute_opcode != BRANCH && execute_opcode != STORE) // opcodes with rd
       begin
-        if ((decodeIR_out[6:0] == 7'b1100011 || decodeIR_out[6:0] == 7'b0100011
-            || decodeIR_out[6:0] == 7'b0110011) && executeIR_out[11:7] == decodeIR_out[24:20]) // opcodes with rs2; checks if rs2 = rd
+        
+        if ((decode_opcode == BRANCH || decode_opcode == STORE || decode_opcode == OP) 
+            && rd_exec == rs2_dec) // opcodes with rs2; checks if rs2 = rd
           begin
+            
             reg_en = 0; clear = 1; pc_write = 0; hzd_out = 1; hzd_taken = 1; // halt the flow of data from new instructions
           end
-        else if (decodeIR_out[2:0] != 3'b111 && decodeIR_out[19:15] == executeIR_out[11:7]) // opcodes with rs1; checks if rs1 = rd
+        else if (decode_opcode != AUIPC && decode_opcode != JAL && decode_opcode != LUI && rs1_dec == rd_exec) // opcodes with rs1; checks if rs1 = rd
           begin
+            hit_if = 1;
             reg_en = 0; clear = 1; pc_write = 0; hzd_out = 1; hzd_taken = 1; // halt the flow of data from new instructions
           end
+        else
+        begin
+          hit_if = 0;
+        end
       end
+     
+
       if (hzd_in == 1) 
       begin
         reg_en = 1; pc_write = 1; hzd_out = 0;
@@ -45,7 +78,9 @@ logic hzd_taken = 0;
         //hzd_out = 0;
         //hzd_taken = 1;
       end
-  end
+      
+    end
+    
 endmodule
 
 module DataResolution_mod(decodeIR_out,executeIR_out,clk,decodeIR_en,executeIR_en,pc_write);
