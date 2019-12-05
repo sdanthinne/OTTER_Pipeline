@@ -69,7 +69,7 @@ module OTTER_Wrapper_old(
      
         if(IOBUS_wr)
             case(IOBUS_addr)
-                LEDS_AD: LEDS <= IOBUS_out;    
+                LEDS_AD: LEDS <= IOBUS_out;
                 SSEG_AD: r_SSEG <= IOBUS_out[15:0];
              
             endcase

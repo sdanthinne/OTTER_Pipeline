@@ -134,6 +134,9 @@ module OTTER_MCU(
         .CSR_MIE(mie) //interrupt enable register
     );
 
+    assign IOBUS_ADDR = alu_reg_out;
+    assign IOBUS_OUT = md2_out;
+    
     OTTER_mem_byte OTTER_MEMORY(
         .MEM_CLK(CLK),
         .MEM_ADDR1(pc_out),
