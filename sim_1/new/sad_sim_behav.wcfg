@@ -11,24 +11,32 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="700070000fs"></ZoomStartTime>
-      <ZoomEndTime time="1016270001fs"></ZoomEndTime>
-      <Cursor1Time time="242400000fs"></Cursor1Time>
+      <ZoomStartTime time="593000000fs"></ZoomStartTime>
+      <ZoomEndTime time="911600001fs"></ZoomEndTime>
+      <Cursor1Time time="786800000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="198"></NameColumnWidth>
-      <ValueColumnWidth column_width="97"></ValueColumnWidth>
+      <ValueColumnWidth column_width="85"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="42" />
+   <WVObjectSize size="57" />
+   <wave_markers>
+      <marker label="" time="1500900000" />
+      <marker label="" time="794200000" />
+   </wave_markers>
    <wvobject type="logic" fp_name="/sad_sim/clk">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/pc_mux/SEL">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">SEL[2:0]</obj_property>
       <obj_property name="ObjectShortName">SEL[2:0]</obj_property>
       <obj_property name="label">PC_SOURCE[2:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group56">
       <obj_property name="label">PC_MUX</obj_property>
@@ -73,6 +81,8 @@
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/OTTER_PC/PC_WRITE">
       <obj_property name="ElementShortName">PC_WRITE</obj_property>
       <obj_property name="ObjectShortName">PC_WRITE</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group285">
       <obj_property name="label">PC</obj_property>
@@ -83,85 +93,233 @@
          <obj_property name="ElementShortName">D_OUT[31:0]</obj_property>
          <obj_property name="ObjectShortName">D_OUT[31:0]</obj_property>
          <obj_property name="label">PC_out[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/PC_WAIT/dout">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">dout[31:0]</obj_property>
          <obj_property name="ObjectShortName">dout[31:0]</obj_property>
          <obj_property name="label">PC_WAIT_out[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/DECODE_PC/dout">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">dout[31:0]</obj_property>
          <obj_property name="ObjectShortName">dout[31:0]</obj_property>
          <obj_property name="label">DEC_PC[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXECUTE_PC/dout">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">dout[31:0]</obj_property>
          <obj_property name="ObjectShortName">dout[31:0]</obj_property>
          <obj_property name="label">EXE_PC[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEMORY_PC/dout">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">dout[31:0]</obj_property>
          <obj_property name="ObjectShortName">dout[31:0]</obj_property>
          <obj_property name="label">MEM_PC[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_PC/dout">
          <obj_property name="DisplayName">label</obj_property>
          <obj_property name="ElementShortName">dout[31:0]</obj_property>
          <obj_property name="ObjectShortName">dout[31:0]</obj_property>
          <obj_property name="label">WB_PC[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="divider219" type="divider">
+      <obj_property name="label">New Divider 1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#808080</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/DECODE_PC/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">DEC_PC[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/DEC_DECODER/DEC_IR">
+      <obj_property name="ElementShortName">DEC_IR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">DEC_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider219" type="divider">
+      <obj_property name="label">New Divider 1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#808080</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXECUTE_PC/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">EXE_PC[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXE_DECODER/EXE_IR">
+      <obj_property name="ElementShortName">EXE_IR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EXE_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider219" type="divider">
+      <obj_property name="label">New Divider 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#808080</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEMORY_PC/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">MEM_PC[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEM_DECODER/MEM_IR">
+      <obj_property name="ElementShortName">MEM_IR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider219" type="divider">
+      <obj_property name="label">New Divider 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#808080</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_PC/dout">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">dout[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[31:0]</obj_property>
+      <obj_property name="label">WB_PC[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_IR">
+      <obj_property name="ElementShortName">WB_IR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">WB_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider219" type="divider">
+      <obj_property name="label">New Divider 2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="BkColor">#808080</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear">
       <obj_property name="ElementShortName">clear</obj_property>
       <obj_property name="ObjectShortName">clear</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear_data">
       <obj_property name="ElementShortName">clear_data</obj_property>
       <obj_property name="ObjectShortName">clear_data</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/pc_write">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">pc_write</obj_property>
       <obj_property name="ObjectShortName">pc_write</obj_property>
       <obj_property name="label">pc_write_data_res</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear_decode_delayed">
       <obj_property name="ElementShortName">clear_decode_delayed</obj_property>
       <obj_property name="ObjectShortName">clear_decode_delayed</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/pc_write">
       <obj_property name="ElementShortName">pc_write</obj_property>
       <obj_property name="ObjectShortName">pc_write</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/clear_decode">
       <obj_property name="ElementShortName">clear_decode</obj_property>
       <obj_property name="ObjectShortName">clear_decode</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group325">
+      <obj_property name="label">data_reso_counter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/counter">
+         <obj_property name="ElementShortName">counter[1:0]</obj_property>
+         <obj_property name="ObjectShortName">counter[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/p_counter">
+         <obj_property name="ElementShortName">p_counter[1:0]</obj_property>
+         <obj_property name="ObjectShortName">p_counter[1:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/reg_en">
+         <obj_property name="ElementShortName">reg_en</obj_property>
+         <obj_property name="ObjectShortName">reg_en</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/pc_write">
+         <obj_property name="ElementShortName">pc_write</obj_property>
+         <obj_property name="ObjectShortName">pc_write</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/clear">
+         <obj_property name="ElementShortName">clear</obj_property>
+         <obj_property name="ObjectShortName">clear</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_MEMORY/MEM_DOUT1">
       <obj_property name="ElementShortName">MEM_DOUT1[31:0]</obj_property>
       <obj_property name="ObjectShortName">MEM_DOUT1[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/DEC_DECODER/DEC_IR">
       <obj_property name="ElementShortName">DEC_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">DEC_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXE_DECODER/EXE_IR">
       <obj_property name="ElementShortName">EXE_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">EXE_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEM_DECODER/MEM_IR">
       <obj_property name="ElementShortName">MEM_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">MEM_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_IR">
       <obj_property name="ElementShortName">WB_IR[31:0]</obj_property>
       <obj_property name="ObjectShortName">WB_IR[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group230">
       <obj_property name="label">DATA_RESOLUTION</obj_property>
@@ -192,58 +350,80 @@
       <obj_property name="ElementShortName">data_store[31:0]</obj_property>
       <obj_property name="ObjectShortName">data_store[31:0]</obj_property>
       <obj_property name="label">DEC_IR_STORE[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXECUTE_IR/data_store">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">data_store[31:0]</obj_property>
       <obj_property name="ObjectShortName">data_store[31:0]</obj_property>
       <obj_property name="label">EXE_IR_STORE[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEMORY_IR/data_store">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">data_store[31:0]</obj_property>
       <obj_property name="ObjectShortName">data_store[31:0]</obj_property>
       <obj_property name="label">MEM_IR_STORE[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_IR/data_store">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">data_store[31:0]</obj_property>
       <obj_property name="ObjectShortName">data_store[31:0]</obj_property>
       <obj_property name="label">WB_IR_STORE[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/DEC_DECODER/DEC_OPCODE_T">
       <obj_property name="ElementShortName">DEC_OPCODE_T[6:0]</obj_property>
       <obj_property name="ObjectShortName">DEC_OPCODE_T[6:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/EXE_DECODER/EXEC_OPCODE_T">
       <obj_property name="ElementShortName">EXEC_OPCODE_T[6:0]</obj_property>
       <obj_property name="ObjectShortName">EXEC_OPCODE_T[6:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/MEM_DECODER/MEM_OPCODE">
       <obj_property name="ElementShortName">MEM_OPCODE[6:0]</obj_property>
       <obj_property name="ObjectShortName">MEM_OPCODE[6:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/WB_DECODER/WB_OPCODE">
       <obj_property name="ElementShortName">WB_OPCODE[6:0]</obj_property>
       <obj_property name="ObjectShortName">WB_OPCODE[6:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerA/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">REGISTER_A_OUT[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerB/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">REGISTER_B_OUT[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/MD1/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">MD1_OUT[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group134">
       <obj_property name="label">RF_WRITE</obj_property>
@@ -282,16 +462,22 @@
       <obj_property name="ElementShortName">EN</obj_property>
       <obj_property name="ObjectShortName">EN</obj_property>
       <obj_property name="label">write_EN</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/alu_reg/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">ALU_REG_dout[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/GPRs/mem">
       <obj_property name="ElementShortName">mem[0:31][31:0]</obj_property>
       <obj_property name="ObjectShortName">mem[0:31][31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group48">
       <obj_property name="label">TAR_GEN</obj_property>
@@ -332,64 +518,80 @@
    <wvobject type="group" fp_name="group55">
       <obj_property name="label">IMM_GEN</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/IR">
          <obj_property name="ElementShortName">IR[31:0]</obj_property>
          <obj_property name="ObjectShortName">IR[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/I">
          <obj_property name="ElementShortName">I[31:0]</obj_property>
          <obj_property name="ObjectShortName">I[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/S">
          <obj_property name="ElementShortName">S[31:0]</obj_property>
          <obj_property name="ObjectShortName">S[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/B">
          <obj_property name="ElementShortName">B[31:0]</obj_property>
          <obj_property name="ObjectShortName">B[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/U">
          <obj_property name="ElementShortName">U[31:0]</obj_property>
          <obj_property name="ObjectShortName">U[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/sad_sim/wr/MCU/immediate_generator/J">
          <obj_property name="ElementShortName">J[31:0]</obj_property>
          <obj_property name="ObjectShortName">J[31:0]</obj_property>
+         <obj_property name="CustomSignalColor">#808080</obj_property>
+         <obj_property name="UseCustomSignalColor">true</obj_property>
       </wvobject>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/decodeIR_out">
       <obj_property name="ElementShortName">decodeIR_out[31:0]</obj_property>
       <obj_property name="ObjectShortName">decodeIR_out[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/data_resolution/executeIR_out">
       <obj_property name="ElementShortName">executeIR_out[31:0]</obj_property>
       <obj_property name="ObjectShortName">executeIR_out[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/sad_sim/wr/MCU/data_resolution/reg_en">
       <obj_property name="ElementShortName">reg_en</obj_property>
       <obj_property name="ObjectShortName">reg_en</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group106">
-      <obj_property name="label">HZD_REG</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerA/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">REG_A_dout[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/sad_sim/wr/MCU/registerB/dout">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">dout[31:0]</obj_property>
       <obj_property name="ObjectShortName">dout[31:0]</obj_property>
       <obj_property name="label">REG_B_dout[31:0]</obj_property>
+      <obj_property name="CustomSignalColor">#808080</obj_property>
+      <obj_property name="UseCustomSignalColor">true</obj_property>
    </wvobject>
    <wvobject type="group" fp_name="group227">
       <obj_property name="label">wait_clock_cycles_module</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/sad_sim/wr/MCU/persist_branch_clear/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -414,5 +616,17 @@
          <obj_property name="ElementShortName">wait_time[31:0]</obj_property>
          <obj_property name="ObjectShortName">wait_time[31:0]</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_MEMORY/MEM_ADDR2">
+      <obj_property name="ElementShortName">MEM_ADDR2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_ADDR2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/sad_sim/wr/MCU/OTTER_MEMORY/MEM_DIN2">
+      <obj_property name="ElementShortName">MEM_DIN2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_DIN2[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/sad_sim/wr/MCU/OTTER_MEMORY/MEM_WRITE2">
+      <obj_property name="ElementShortName">MEM_WRITE2</obj_property>
+      <obj_property name="ObjectShortName">MEM_WRITE2</obj_property>
    </wvobject>
 </wave_config>
