@@ -76,7 +76,9 @@ module OTTER_MCU(
         .PC_SOURCE(pc_src),
         .CLEAR(clear_decode)
     );
-    persist_one_two_clk  #(.wait_time(1)) persist_branch_clear (.clk(CLK),.in_signal(clear_decode),.out_signal(clear_decode_delayed));
+    persist_one_two_clk  #(.wait_time(1)) persist_branch_clear (.clk(CLK),
+    .in_signal(clear_decode),
+    .out_signal(clear_decode_delayed));
 
     DataResolution_mod data_resolution(
         .clk(CLK),
@@ -259,6 +261,7 @@ module OTTER_MCU(
     );
     assign IOBUS_OUT = rs2;
     assign IOBUS_ADDR = alu_out;
+    
     TarGen tar_gen_main (.RS1(rs1),.I_TYPE(i_type),.B_TYPE(b_type),.J_TYPE(j_type),.PC_OUT(decode_pc),.JALR(jalr),.BRANCH(branch),.JUMP(jump));
 
 endmodule

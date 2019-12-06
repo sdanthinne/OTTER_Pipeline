@@ -64,7 +64,7 @@ module OTTER_Wrapper_old(
    assign s_reset = BTNC;
    
      // Connect Board peripherals (Memory Mapped IO devices) to IOBUS /////////////////////////////////////////
-    always_ff @ (posedge sclk)
+    always_ff @ (posedge CLK)
     begin
      
         if(IOBUS_wr)
